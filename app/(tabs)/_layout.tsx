@@ -61,7 +61,7 @@ const _layout = () => {
                     position: 'absolute',
                     overflow: 'hidden',
                     borderWidth: 1,
-                    shadowColor: 'gray',
+                    borderColor: '#0f0D23',
                 },
                 tabBarItemStyle: {
                     width: '100%',
