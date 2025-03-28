@@ -6,27 +6,33 @@ import { fetchMovies } from '@/services/api';
 import { icons } from '@/constants/icons';
 import SearchBar from '@/components/SearchBar';
 import { useEffect, useState } from 'react';
+import { updateSearchCount } from '@/services/appwrite';
 
 export default function Search() {
 
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  const [startSearching, setStartSearching] = useState<boolean>(false);
-
   const { data: movies, loading: moviesLoading, error: moviesError, refetch: loadMovies, reset } = useFetch(() => fetchMovies({ query: searchQuery }), false);
 
   useEffect(() => {
 
-    const func = async () => {
+
+    const timeoutId = setTimeout(async () => {
       if (searchQuery.trim()) {
         await loadMovies();
+
+        if (movies?.length > 0 && movies?.[0]) {
+          await updateSearchCount(searchQuery, movies[0]);
+        }
       } else {
         reset();
       }
-    }
 
-    func();
-  }, [startSearching])
+    }, 1000);
+
+    return () => clearTimeout(timeoutId);
+
+  }, [searchQuery])
 
 
   return (
@@ -57,8 +63,7 @@ export default function Search() {
               <SearchBar
                 placeholder='Search movies ...'
                 value={searchQuery}
-                onChangeText={(text: string) => setSearchQuery(text)}
-                onSubmitEditing={() => setStartSearching(!startSearching)} />
+                onChangeText={(text: string) => setSearchQuery(text)} />
             </View>
 
             {moviesLoading && (
