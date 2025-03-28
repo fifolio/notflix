@@ -16,7 +16,7 @@ const TabIcon = ({ focused, icon, title }: any) => {
                 mt-3
                 ml-3
                 mr-4
-                min-w-[115px]
+                min-w-[112px]
                 min-h-[70px]
                 rounded-full
                 justify-center
@@ -55,7 +55,7 @@ const _layout = () => {
                 tabBarStyle: {
                     backgroundColor: '#0f0D23',
                     borderRadius: 50,
-                    marginHorizontal: 20,
+                    marginHorizontal: 90,
                     marginBottom: 36,
                     height: 52,
                     position: 'absolute',
@@ -79,26 +79,6 @@ const _layout = () => {
                         <TabIcon focused={focused} icon={icons.home} title="Home" />
                     )
                 }} />
-
-            <Tabs.Screen
-                name="profile"
-                options={{
-                    headerShown: false,
-                    tabBarIcon: ({ focused }) => (
-                        <TabIcon focused={focused} icon={icons.star} title="Profile" />
-                    )
-                }}
-            />
-
-            <Tabs.Screen
-                name="saved"
-                options={{
-                    headerShown: false,
-                    tabBarIcon: ({ focused }) => (
-                        <TabIcon focused={focused} icon={icons.save} title="Saved" />
-                    )
-                }}
-            />
 
             <Tabs.Screen
                 name="search"
