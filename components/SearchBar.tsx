@@ -3,10 +3,10 @@ import React from 'react';
 import { icons } from '@/constants/icons';
 
 interface Props {
-    placeholder: string;
+    placeholder?: string;
     onPress?: () => void;
-    value: string;
-    onChangeText: (text: string) => void;
+    value?: string;
+    onChangeText?: (text: string) => void;
 }
 
 export default function SearchBar({ placeholder, onPress, value, onChangeText }: Props) {
